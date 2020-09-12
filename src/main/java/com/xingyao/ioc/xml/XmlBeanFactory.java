@@ -1,11 +1,18 @@
 package com.xingyao.ioc.xml;
 
 import com.xingyao.ioc.core.BeanDefinition;
+import com.xingyao.ioc.core.BeanReference;
+import com.xingyao.ioc.core.PropertyValue;
+import com.xingyao.ioc.core.PropertyValues;
 import com.xingyao.ioc.extension.BeanPostProcessor;
+import com.xingyao.ioc.extension.InitializeBean;
 import com.xingyao.ioc.factory.BeanFactory;
 import com.xingyao.ioc.factory.BeanRegistry;
 import com.xingyao.ioc.reader.BeanDefinitionReader;
 
+import java.lang.reflect.Executable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +79,88 @@ public class XmlBeanFactory implements BeanFactory, BeanRegistry {
 
     @Override
     public Object getBean(String name) {
-        return null;
+        BeanDefinition beanDefinition = this.beanDefinitionMap.get(name);
+        if(beanDefinition == null){
+
+        }
+        Class beanClass = beanDefinition.getClassType();
+        // 反射创建bean实例
+        Object bean = null;
+        try{
+            bean = beanClass.newInstance();
+        }catch (Exception e){
+            throw new IllegalStateException("Initialize bean error");
+        }
+        if(bean != null){
+            this.createBean(bean,beanDefinition);
+            try{
+                this.initializeBean(bean,name);
+            }catch (Exception e){
+                // TODO  handle Exception while initialize bean
+            }
+
+        }
+        return bean;
+    }
+
+    /**
+     * 设置bean的属性
+     * @param bean
+     * @param bd
+     */
+    private void createBean(Object bean,BeanDefinition bd){
+        PropertyValues pvs = bd.getPropertyValues();
+        for(PropertyValue pv : pvs.getPropertyValues()){
+            Object value = pv.getValue();
+
+            /**
+             * TODO  fix: circle dependency
+             */
+            if(value instanceof BeanReference){
+                String refName = ((BeanReference) value).getName();
+                value = this.getBean(refName);
+            }
+            try {
+                // 首先使用setter来注入
+                Method declaredMethod = bean.getClass().getDeclaredMethod(
+                        "set" + pv.getName().substring(0, 1).toUpperCase()
+                                + pv.getName().substring(1), value.getClass());
+                declaredMethod.setAccessible(true);
+
+                declaredMethod.invoke(bean, value);
+            } catch (Exception e) {
+                try{
+                    // setter注入失败，使用字段注入
+                    Field declaredField = bean.getClass().getDeclaredField(pv.getName());
+                    declaredField.setAccessible(true);
+                    declaredField.set(bean, value);
+                }catch (Exception se){
+                    throw new IllegalStateException("populate property failded");
+                }
+
+            }
+        }
+    }
+
+    /**
+     * 初始化bean, apply all beanPostProcessors
+     * TODO add postConstruct
+     * @param bean
+     * @param name
+     */
+    private void initializeBean(Object bean,String name) throws Exception{
+        // apply postProcessBeforeInitialization
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            beanPostProcessor.postProcessBeforeInitialization(bean,name);
+        }
+        // call InitializeBean.afterPropertiesSet()
+        if(bean instanceof InitializeBean){
+            ((InitializeBean) bean).afterPropertiesSet();
+        }
+
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            beanPostProcessor.postProcessAfterInitialization(bean,name);
+        }
     }
 
     @Override
