@@ -1,17 +1,31 @@
 package com.xingyao.ioc.core;
 
+import java.util.ArrayList;
+
 /**
  * @Author ranger
  * @Date 2020/9/6 16:32
  **/
 public class BeanDefinition {
 
+    /**
+     * bean的名字
+     */
     private String name;
 
+    /**
+     * Class的全路径
+     */
     private String beanClass;
 
+    /**
+     * Class 对象
+     */
     private Class classType;
 
+    /**
+     * bean的属性
+     */
     private PropertyValues propertyValues;
 
     public BeanDefinition() {
@@ -19,11 +33,13 @@ public class BeanDefinition {
 
     public BeanDefinition(String name) {
         this.name = name;
+        this.propertyValues = new PropertyValues();
     }
 
     public BeanDefinition(String name, String beanClass) {
         this.name = name;
         this.beanClass = beanClass;
+        this.propertyValues = new PropertyValues();
     }
 
     public BeanDefinition(String name, String beanClass, PropertyValues propertyValues) {
@@ -48,6 +64,7 @@ public class BeanDefinition {
         this.beanClass = beanClass;
         try{
             Class clazz = Class.forName(beanClass);
+            this.classType = clazz;
         }catch (ClassNotFoundException e){
             throw e;
         }

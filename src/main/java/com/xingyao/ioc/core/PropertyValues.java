@@ -9,10 +9,14 @@ import java.util.List;
  **/
 public class PropertyValues {
 
-    private List<PropertyValue> values = new ArrayList<>();
+    private List<PropertyValue> values;
 
     public PropertyValues(List<PropertyValue> values) {
         this.values = values;
+    }
+
+    public PropertyValues(){
+        values = new ArrayList<>();;
     }
 
     public void addPropertyValue(PropertyValue pv){

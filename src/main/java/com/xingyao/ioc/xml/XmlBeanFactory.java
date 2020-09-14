@@ -44,7 +44,9 @@ public class XmlBeanFactory implements BeanFactory, BeanRegistry {
             this.beanDefinitionReader.loadBeanDefinitions(configLocation);
             registerBeanPostProcessor();
         }catch (Exception e){
-            // ignore
+            // ignore or note ex
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -109,6 +111,7 @@ public class XmlBeanFactory implements BeanFactory, BeanRegistry {
      * @param bd
      */
     private void createBean(Object bean,BeanDefinition bd){
+        // todo fix: 如果PropertyValue种包含了没有的字段呢？ 岂不是就异常了，所以不应该以配置的Property为主导
         PropertyValues pvs = bd.getPropertyValues();
         for(PropertyValue pv : pvs.getPropertyValues()){
             Object value = pv.getValue();
