@@ -171,7 +171,14 @@ public class XmlBeanFactory implements BeanFactory, BeanRegistry {
         return null;
     }
 
-
+    @Override
+    public <T> T getBean(String name, Class<T> requireType) {
+        Object bean = this.getBean(name);
+        if(bean != null && !requireType.isInstance(bean)){
+            throw new IllegalStateException("wrong bean type");
+        }
+        return (T)bean;
+    }
 
 
 }

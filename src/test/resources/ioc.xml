@@ -13,4 +13,6 @@ http://www.springframework.org/schema/beans ">
         <property name="height" value="1949mm"/>
         <property name="wheel" ref="wheel"/>
     </bean>
+
+<!--    <bean id="printBeanPostProcessor"class="com.xingyao.ioc.support.PrintBeanPostProcessor"></bean>-->
 </beans>

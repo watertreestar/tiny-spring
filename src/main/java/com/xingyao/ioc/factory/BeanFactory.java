@@ -19,4 +19,7 @@ public interface BeanFactory {
      * @return
      */
     <T> T getBean(Class<T> clazz);
+
+
+    <T> T getBean(String name,Class<T> requireType);
 }
