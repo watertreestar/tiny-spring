@@ -6,6 +6,7 @@ import com.xingyao.ioc.extension.BeanPostProcessor;
 import com.xingyao.ioc.factory.BeanFactory;
 import com.xingyao.util.ClassUtils;
 import com.xingyao.util.CollectionUtils;
+import com.xingyao.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -31,6 +32,9 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws Exception {
+        // 获取满足此bean的advisor
+        List<Advisor> matchedAdvisors = this.getMatchedAdvisors(bean,beanName);
+        // 生成代理，织入advisor
         return null;
     }
 
@@ -49,7 +53,12 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
         this.beanFactory = beanFactory;
     }
 
-    //在此判断bean是否需要进行切面增强
+    /**
+     * 获取匹配的Advisor
+     * @param bean
+     * @param beanName
+     * @return
+     */
     private List<Advisor> getMatchedAdvisors(Object bean, String beanName) {
         if (CollectionUtils.isEmpty(advisors)) {
             return null;
@@ -71,7 +80,11 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
         return matchAdvisors;
     }
 
-    //获取类的所有方法,包括继承的父类和实现的接口里面的方法
+    /**
+     * 获取类中所有的方法
+     * @param beanClass
+     * @return
+     */
     private List<Method> getAllMethodForClass(Class<?> beanClass) {
         List<Method> allMethods = new LinkedList<>();
         //获取beanClass的所有接口
@@ -89,8 +102,15 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
     }
 
 
-    private boolean isPointcutMatchBean(Advisor pa, Class<?> beanClass, List<Method> methods) {
-        PointCut p = pa.getPointCut();
+    /**
+     * 该advisor是否匹配该类
+     * @param advisor
+     * @param beanClass
+     * @param methods
+     * @return
+     */
+    private boolean isPointcutMatchBean(Advisor advisor, Class<?> beanClass, List<Method> methods) {
+        PointCut p = advisor.getPointCut();
 
         // 首先判断类是否匹配
         if (!p.matchClass(beanClass)) {
