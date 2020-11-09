@@ -14,7 +14,7 @@ public class BeanFactoryTest {
     String configLocation;
     @Before
     public void setUp(){
-        configLocation = this.getClass().getClassLoader().getResource("ioc.xml").getFile();
+        configLocation = this.getClass().getClassLoader().getResource("bean-factory.xml").getFile();
     }
 
 
