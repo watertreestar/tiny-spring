@@ -17,6 +17,9 @@ public class AOPTest {
 
     @Test
     public void run(){
+        /**
+         * 增强逻辑
+         */
         Invocation invocation = () -> {
             System.out.println("前置操作");
             return null;
