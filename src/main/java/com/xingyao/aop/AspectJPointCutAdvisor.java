@@ -6,6 +6,7 @@ import com.xingyao.aop.pointcut.PointCut;
 /**
  * @Author ranger
  * @Date 2020/11/9 20:16
+ * 切面包含了切点和advice
  **/
 public class AspectJPointCutAdvisor extends BeanFactoryPointCutAdvisor {
 
