@@ -1,5 +1,6 @@
 package com.xingyao.aop;
 
+import com.xingyao.aop.factory.AopProxyFactory;
 import com.xingyao.aop.pointcut.PointCut;
 import com.xingyao.ioc.extension.BeanFactoryAware;
 import com.xingyao.ioc.extension.BeanPostProcessor;
@@ -32,10 +33,17 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws Exception {
+        // todo 提示信息
         // 获取满足此bean的advisor
-        List<Advisor> matchedAdvisors = this.getMatchedAdvisors(bean,beanName);
+        List<Advisor> matchedAdvisors = this.getMatchedAdvisors(bean, beanName);
         // 生成代理，织入advisor
-        return null;
+        return this.createProxy(bean, beanName, matchedAdvisors);
+    }
+
+    private Object createProxy(Object bean, String beanName, List<Advisor> matchedAdvisor) {
+        AopProxy aopProxy = AopProxyFactory.getDefaultAopProxyFactory()
+                .createAopProxy(bean, beanName, matchedAdvisor);
+        return aopProxy;
     }
 
     @Override
@@ -55,6 +63,7 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     /**
      * 获取匹配的Advisor
+     *
      * @param bean
      * @param beanName
      * @return
@@ -82,6 +91,7 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     /**
      * 获取类中所有的方法
+     *
      * @param beanClass
      * @return
      */
@@ -104,6 +114,7 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     /**
      * 该advisor是否匹配该类
+     *
      * @param advisor
      * @param beanClass
      * @param methods
