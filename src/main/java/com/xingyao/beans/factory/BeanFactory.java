@@ -1,4 +1,4 @@
-package com.xingyao.ioc.factory;
+package com.xingyao.beans.factory;
 
 /**
  * @Author ranger

@@ -1,11 +1,11 @@
-package com.xingyao.ioc.xml;
+package com.xingyao.beans.xml;
 
-import com.xingyao.ioc.core.BeanDefinition;
-import com.xingyao.ioc.core.BeanReference;
-import com.xingyao.ioc.core.PropertyValue;
-import com.xingyao.ioc.factory.BeanFactory;
-import com.xingyao.ioc.factory.BeanRegistry;
-import com.xingyao.ioc.reader.BeanDefinitionReader;
+import com.xingyao.beans.core.BeanDefinition;
+import com.xingyao.beans.core.BeanReference;
+import com.xingyao.beans.core.PropertyValue;
+import com.xingyao.beans.factory.BeanFactory;
+import com.xingyao.beans.factory.BeanRegistry;
+import com.xingyao.beans.reader.BeanDefinitionReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

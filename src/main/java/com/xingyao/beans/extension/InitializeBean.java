@@ -1,4 +1,4 @@
-package com.xingyao.ioc.extension;
+package com.xingyao.beans.extension;
 
 /**
  * @Author ranger
@@ -7,7 +7,7 @@ package com.xingyao.ioc.extension;
 public interface InitializeBean {
 
     /**
-     * Invoked by the containing {@link com.xingyao.ioc.factory.BeanFactory}after it has set all bean properties
+     * Invoked by the containing {@link com.xingyao.beans.factory.BeanFactory}after it has set all bean properties
      * and satisfied {@link BeanFactoryAware}.
      * <p>This method allows the bean instance to perform validation of its overall
      * configuration and final initialization when all bean properties have been set.

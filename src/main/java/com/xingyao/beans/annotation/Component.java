@@ -1,2 +1,3 @@
-package com.xingyao.beans.annotation;public @interface Component {
+package com.xingyao.beans.annotation;
+public @interface Component {
 }

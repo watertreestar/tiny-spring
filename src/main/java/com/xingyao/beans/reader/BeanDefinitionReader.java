@@ -1,4 +1,4 @@
-package com.xingyao.ioc.reader;
+package com.xingyao.beans.reader;
 
 /**
  * @Author ranger

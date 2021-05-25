@@ -2,9 +2,9 @@ package com.xingyao.aop;
 
 import com.xingyao.aop.factory.AopProxyFactory;
 import com.xingyao.aop.pointcut.PointCut;
-import com.xingyao.ioc.extension.BeanFactoryAware;
-import com.xingyao.ioc.extension.BeanPostProcessor;
-import com.xingyao.ioc.factory.BeanFactory;
+import com.xingyao.beans.extension.BeanFactoryAware;
+import com.xingyao.beans.extension.BeanPostProcessor;
+import com.xingyao.beans.factory.BeanFactory;
 import com.xingyao.util.ClassUtils;
 import com.xingyao.util.CollectionUtils;
 import com.xingyao.util.ReflectionUtils;
@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * @Author ranger
  * @Date 2020/11/9 20:41
+ * 创建切面
  **/
 public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegistry, BeanFactoryAware {
 
@@ -33,7 +34,7 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws Exception {
-        // todo 提示信息
+
         // 获取满足此bean的advisor
         List<Advisor> matchedAdvisors = this.getMatchedAdvisors(bean, beanName);
         // 生成代理，织入advisor
@@ -41,9 +42,9 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
     }
 
     private Object createProxy(Object bean, String beanName, List<Advisor> matchedAdvisor) {
-        AopProxy aopProxy = AopProxyFactory.getDefaultAopProxyFactory()
-                .createAopProxy(bean, beanName, matchedAdvisor);
-        return aopProxy;
+        Object proxy = AopProxyFactory.getDefaultAopProxyFactory()
+                .createAopProxy(bean, beanName, matchedAdvisor).getProxy();
+        return proxy;
     }
 
     @Override

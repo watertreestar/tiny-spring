@@ -1,7 +1,6 @@
-package com.xingyao.ioc;
+package com.xingyao.beans;
 
-import com.xingyao.ioc.factory.BeanFactory;
-import com.xingyao.ioc.xml.XmlBeanFactory;
+import com.xingyao.beans.factory.BeanFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class BeanFactoryTest {
 
     @Test
     public void run(){
-        BeanFactory beanFactory = new XmlBeanFactory(configLocation);
+        BeanFactory beanFactory = new com.xingyao.beans.xml.XmlBeanFactory(configLocation);
         Object car = beanFactory.getBean("car");
         System.out.println(car);
         Assert.assertNotNull(car);

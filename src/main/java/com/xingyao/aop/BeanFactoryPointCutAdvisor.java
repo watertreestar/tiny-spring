@@ -1,7 +1,7 @@
 package com.xingyao.aop;
 
-import com.xingyao.ioc.extension.BeanFactoryAware;
-import com.xingyao.ioc.factory.BeanFactory;
+import com.xingyao.beans.extension.BeanFactoryAware;
+import com.xingyao.beans.factory.BeanFactory;
 
 /**
  * @Author ranger

@@ -1,16 +1,18 @@
-package com.xingyao.ioc.xml;
+package com.xingyao.beans.xml;
 
-import com.xingyao.ioc.core.BeanDefinition;
-import com.xingyao.ioc.core.BeanReference;
-import com.xingyao.ioc.core.PropertyValue;
-import com.xingyao.ioc.core.PropertyValues;
-import com.xingyao.ioc.extension.BeanPostProcessor;
-import com.xingyao.ioc.extension.InitializeBean;
-import com.xingyao.ioc.factory.BeanFactory;
-import com.xingyao.ioc.factory.BeanRegistry;
-import com.xingyao.ioc.reader.BeanDefinitionReader;
 
-import java.lang.reflect.Executable;
+
+import com.xingyao.beans.core.BeanDefinition;
+import com.xingyao.beans.core.BeanReference;
+import com.xingyao.beans.core.PropertyValue;
+import com.xingyao.beans.core.PropertyValues;
+import com.xingyao.beans.extension.BeanPostProcessor;
+import com.xingyao.beans.extension.InitializeBean;
+import com.xingyao.beans.factory.BeanFactory;
+import com.xingyao.beans.factory.BeanRegistry;
+import com.xingyao.beans.reader.BeanDefinitionReader;
+import com.xingyao.beans.xml.XmlBeanDefinitionReader;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.Map;
  * 根据XML配置文件实现的BeanFactory
  **/
 public class XmlBeanFactory implements BeanFactory, BeanRegistry {
-    private Map<String,BeanDefinition> beanDefinitionMap = new HashMap<>();
+    private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
     private List<BeanDefinition> beanDefinitions = new ArrayList<>();
 
@@ -76,8 +78,6 @@ public class XmlBeanFactory implements BeanFactory, BeanRegistry {
         this.beanDefinitionMap.put(name,beanDefinition);
         this.beanDefinitions.add(beanDefinition);
     }
-
-
 
     @Override
     public Object getBean(String name) {

@@ -1,6 +1,6 @@
-package com.xingyao.ioc.extension;
+package com.xingyao.beans.extension;
 
-import com.xingyao.ioc.factory.BeanFactory;
+import com.xingyao.beans.factory.BeanFactory;
 
 /**
  * @Author ranger

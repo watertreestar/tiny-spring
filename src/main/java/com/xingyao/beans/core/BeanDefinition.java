@@ -1,4 +1,4 @@
-package com.xingyao.ioc.core;
+package com.xingyao.beans.core;
 
 import java.util.ArrayList;
 

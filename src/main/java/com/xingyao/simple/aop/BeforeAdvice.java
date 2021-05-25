@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 /**
  * @Author ranger
  * @Date 2020/9/6 16:06
+ * 前置通知，包含了增强逻辑Invocation和被代理对象
  **/
 public class BeforeAdvice extends Advice {
 

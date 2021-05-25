@@ -1,6 +1,6 @@
-package com.xingyao.ioc.support;
+package com.xingyao.beans.support;
 
-import com.xingyao.ioc.extension.BeanPostProcessor;
+import com.xingyao.beans.extension.BeanPostProcessor;
 
 /**
  * @Author ranger

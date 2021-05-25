@@ -1,4 +1,4 @@
-package com.xingyao.ioc.extension;
+package com.xingyao.beans.extension;
 
 /**
  * @Author ranger
