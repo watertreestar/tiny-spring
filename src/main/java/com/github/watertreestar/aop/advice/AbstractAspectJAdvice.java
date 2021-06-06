@@ -1,4 +1,4 @@
-package com.github.watertreestar.aop;
+package com.github.watertreestar.aop.advice;
 
 import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
 
@@ -8,10 +8,17 @@ import java.lang.reflect.Method;
 /**
  * @Author ranger
  * @Date 2020/11/21 14:04
+ * 基于AspectJ实现的增强
  **/
 public abstract class AbstractAspectJAdvice implements Advice {
+    /**
+     * 增强的方法
+     */
     private Method adviceMethod;
 
+    /**
+     * 增强方法所属的实例对象
+     */
     private Object adviceObject;
 
     private AspectJExpressionPointCut pointCut;

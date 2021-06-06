@@ -1,5 +1,6 @@
 package com.github.watertreestar.aop.advisor;
 
+import com.github.watertreestar.aop.advice.Advice;
 import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
 import com.github.watertreestar.aop.pointcut.PointCut;
 import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
@@ -14,7 +15,7 @@ public class AspectJPointCutAdvisor extends BeanFactoryPointCutAdvisor {
 
     private AspectJExpressionPointCut pointCut;
 
-    public AspectJPointCutAdvisor(Advice advice,AspectJExpressionPointCut pointCut){
+    public AspectJPointCutAdvisor(Advice advice, AspectJExpressionPointCut pointCut){
         setAdvice(advice);
         this.pointCut = pointCut;
     }
