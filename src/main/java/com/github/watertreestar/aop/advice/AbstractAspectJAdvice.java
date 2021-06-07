@@ -21,14 +21,12 @@ public abstract class AbstractAspectJAdvice implements Advice {
      */
     private Object adviceObject;
 
-    private AspectJExpressionPointCut pointCut;
 
     private final Class<?>[] parameterTypes;
 
-    public AbstractAspectJAdvice(Method adviceMethod,Object adviceObject,AspectJExpressionPointCut pointCut){
+    public AbstractAspectJAdvice(Method adviceMethod,Object adviceObject){
         this.adviceMethod = adviceMethod;
         this.adviceObject = adviceObject;
-        this.pointCut = pointCut;
         this.parameterTypes = adviceMethod.getParameterTypes();
     }
 
