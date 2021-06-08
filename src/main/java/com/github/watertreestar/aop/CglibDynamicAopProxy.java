@@ -1,5 +1,6 @@
 package com.github.watertreestar.aop;
 
+import com.github.watertreestar.aop.support.AdvisedSupport;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

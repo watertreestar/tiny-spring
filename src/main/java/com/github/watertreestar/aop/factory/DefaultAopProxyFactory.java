@@ -1,12 +1,10 @@
 package com.github.watertreestar.aop.factory;
 
-import com.github.watertreestar.aop.AdvisedSupport;
-import com.github.watertreestar.aop.Advisor;
+import com.github.watertreestar.aop.advisor.Advisor;
+import com.github.watertreestar.aop.support.AdvisedSupport;
 import com.github.watertreestar.beans.extension.BeanFactoryAware;
 import com.github.watertreestar.beans.factory.BeanFactory;
 import com.github.watertreestar.aop.*;
-import com.github.watertreestar.beans.extension.BeanFactoryAware;
-import com.github.watertreestar.beans.factory.BeanFactory;
 
 import java.util.List;
 

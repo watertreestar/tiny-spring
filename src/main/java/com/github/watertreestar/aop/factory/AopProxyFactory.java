@@ -1,8 +1,7 @@
 package com.github.watertreestar.aop.factory;
 
-import com.github.watertreestar.aop.Advisor;
-import com.github.watertreestar.aop.Advisor;
 import com.github.watertreestar.aop.AopProxy;
+import com.github.watertreestar.aop.advisor.Advisor;
 
 import java.util.List;
 

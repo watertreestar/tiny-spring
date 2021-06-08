@@ -3,8 +3,6 @@ package com.github.watertreestar.aop.advisor;
 import com.github.watertreestar.aop.advice.Advice;
 import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
 import com.github.watertreestar.aop.pointcut.PointCut;
-import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
-import com.github.watertreestar.aop.pointcut.PointCut;
 
 /**
  * @Author ranger

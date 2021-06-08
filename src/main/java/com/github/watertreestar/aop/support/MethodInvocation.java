@@ -1,4 +1,6 @@
-package com.github.watertreestar.aop;
+package com.github.watertreestar.aop.support;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author ranger
@@ -7,4 +9,8 @@ package com.github.watertreestar.aop;
  **/
 public interface MethodInvocation {
     Object process()  throws Throwable;
+
+    Object[] getArguments();
+
+    Method getMethod();
 }

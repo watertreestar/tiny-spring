@@ -1,8 +1,7 @@
 package com.github.watertreestar.aop.advice;
 
-import com.github.watertreestar.aop.MethodInterceptor;
-import com.github.watertreestar.aop.MethodInvocation;
-import com.github.watertreestar.aop.pointcut.AspectJExpressionPointCut;
+import com.github.watertreestar.aop.support.MethodInterceptor;
+import com.github.watertreestar.aop.support.MethodInvocation;
 
 import java.lang.reflect.Method;
 
@@ -10,9 +9,9 @@ import java.lang.reflect.Method;
  * @Author ranger
  * @Date 2020/11/21 14:02
  **/
-public class AspectJAfterAdvice extends AbstractAspectJAdvice implements MethodInterceptor {
+public class AfterAdviceInterceptor extends AbstractAdvice implements MethodInterceptor {
 
-    public AspectJAfterAdvice(Method adviceMethod,Object adviceObject){
+    public AfterAdviceInterceptor(Method adviceMethod,Object adviceObject){
         super(adviceMethod,adviceObject);
     }
 

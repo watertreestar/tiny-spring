@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  * @Date 2020/11/21 14:04
  * 基于AspectJ实现的增强
  **/
-public abstract class AbstractAspectJAdvice implements Advice {
+public abstract class AbstractAdvice implements Advice {
     /**
      * 增强的方法
      */
@@ -21,10 +21,12 @@ public abstract class AbstractAspectJAdvice implements Advice {
      */
     private Object adviceObject;
 
-
+    /**
+     * 参数类型
+     */
     private final Class<?>[] parameterTypes;
 
-    public AbstractAspectJAdvice(Method adviceMethod,Object adviceObject){
+    public AbstractAdvice(Method adviceMethod, Object adviceObject){
         this.adviceMethod = adviceMethod;
         this.adviceObject = adviceObject;
         this.parameterTypes = adviceMethod.getParameterTypes();

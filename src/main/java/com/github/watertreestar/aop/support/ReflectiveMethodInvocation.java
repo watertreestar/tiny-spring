@@ -1,4 +1,4 @@
-package com.github.watertreestar.aop;
+package com.github.watertreestar.aop.support;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -66,6 +66,16 @@ public class ReflectiveMethodInvocation implements MethodInvocation {
                 this.interceptors.get(this.currentInterceptorIndex);
         return interceptor.invoke(this);
 
+    }
+
+    @Override
+    public Object[] getArguments() {
+        return this.arguments;
+    }
+
+    @Override
+    public Method getMethod() {
+        return this.method;
     }
 
     protected Object invokeJoinPoint() throws Throwable{
