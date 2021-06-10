@@ -1,10 +1,17 @@
 package com.github.watertreestar.aop;
 
+import com.github.watertreestar.aop.advice.Advice;
+import com.github.watertreestar.aop.advice.BeforeAdvice;
+import com.github.watertreestar.aop.advice.BeforeAdviceInterceptor;
 import com.github.watertreestar.aop.support.AdvisedSupport;
+import com.github.watertreestar.aop.support.MethodInterceptor;
+import com.github.watertreestar.aop.support.ReflectiveMethodInvocation;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author ranger
@@ -14,7 +21,6 @@ import java.lang.reflect.Proxy;
 public class JdkDynamicAopProxy extends AbstractAopProxy implements InvocationHandler {
 
     public JdkDynamicAopProxy(AdvisedSupport advisedSupport){
-        // todo check arguments
         super(advisedSupport);
     }
 
@@ -34,8 +40,16 @@ public class JdkDynamicAopProxy extends AbstractAopProxy implements InvocationHa
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // todo 执行当前方法匹配的Advisor
-
-        return null;
+        List<Advice> matchedAdvice = this.getMatchedAdvice(method);
+        if(matchedAdvice.size() == 0) {
+            return method.invoke(proxy,args);
+        }else {
+            List<MethodInterceptor> interceptors = new ArrayList<>();
+            for (Advice advice : matchedAdvice) {
+                interceptors.add((MethodInterceptor) advice);
+            }
+            ReflectiveMethodInvocation invocation = new ReflectiveMethodInvocation(this,proxy,method,args,proxy.getClass(),interceptors);
+            return invocation.process();
+        }
     }
 }

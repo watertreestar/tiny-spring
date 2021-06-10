@@ -34,7 +34,7 @@ public class ReflectiveMethodInvocation implements MethodInvocation {
      */
     private int currentInterceptorIndex = -1;
 
-    protected ReflectiveMethodInvocation(
+    public ReflectiveMethodInvocation(
             Object proxy,Object target, Method method, Object[] arguments,
             Class<?> targetClass, List<MethodInterceptor> interceptors) {
 
@@ -58,6 +58,9 @@ public class ReflectiveMethodInvocation implements MethodInvocation {
 
     @Override
     public Object process() throws Throwable {
+        /**
+         * 到达调用链条的末端，就调用真实的方法
+         */
         if(this.currentInterceptorIndex == this.interceptors.size() - 1){
             return this.invokeJoinPoint();
         }

@@ -30,16 +30,20 @@ public class AdvisorAutoProxyCreator implements BeanPostProcessor, AdvisorRegist
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws Exception {
-        return null;
+        return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws Exception {
-
         // 获取满足此bean的advisor
         List<Advisor> matchedAdvisors = this.getMatchedAdvisors(bean, beanName);
+        // 对advisor进行排序
+
         // 生成代理，织入advisor
-        return this.createProxy(bean, beanName, matchedAdvisors);
+        if(matchedAdvisors.size() > 0) {
+            return this.createProxy(bean, beanName, matchedAdvisors);
+        }
+        return bean;
     }
 
     private Object createProxy(Object bean, String beanName, List<Advisor> matchedAdvisor) {

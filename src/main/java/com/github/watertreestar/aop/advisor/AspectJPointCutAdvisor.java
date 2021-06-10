@@ -18,6 +18,12 @@ public class AspectJPointCutAdvisor extends BeanFactoryPointCutAdvisor {
         this.pointCut = pointCut;
     }
 
+    public AspectJPointCutAdvisor(String adviceName,String expression) {
+        setAdviceBeanName(adviceName);
+        this.getAdvice();
+        this.pointCut = new AspectJExpressionPointCut(expression);
+    }
+
     public AspectJPointCutAdvisor(Advice advice,String expression){
         setAdvice(advice);
         this.pointCut = new AspectJExpressionPointCut(expression);
